@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluesterer Social Links</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: rgb(64, 64, 64);
+            background: linear-gradient(180deg, rgba(64, 64, 64, 1) 0%, rgba(0, 0, 0, 1) 100%);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Positionierung der Buttons oben links */
+        .header-buttons {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 20px;
+            z-index: 10; /* Stellt sicher, dass die Buttons immer oben sind */
+        }
+
+        .header-buttons a {
+            font-size: 1.2em;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .header-buttons a:hover {
+            color: #ffcc00;
+            border-color: #ffcc00;
+        }
+
+        .header-buttons a:active {
+            color: #ff6a00;
+        }
+
+        .header-buttons a.active {
+            border-bottom: 3px solid #ffcc00; /* Unterstrich für den aktiven Button */
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            margin-top: 80px; /* Platz für die fixierten Buttons */
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #ffcc00;
+            margin-bottom: 25px;
+        }
+
+        .link-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-container a {
+            display: block;
+            padding: 18px;
+            background: linear-gradient(145deg, #ff6a00, #ff8e00);
+            color: white;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .link-container a:hover {
+            background: linear-gradient(145deg, #ff8e00, #ff6a00);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .link-container a:active {
+            background: linear-gradient(145deg, #ff6a00, #ff8e00);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(0);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.9em;
+            color: white;
+            text-align: right;
+        }
+
+        .footer a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+   <div class="header-buttons">
+    <!-- Home Button -->
+    <a href="index.html" class="active">Home</a>
+    <!-- Über mich Button -->
+    <a href="ueber-mich.html">Über mich</a>
+    <!-- Partner Button -->
+    <a href="partner.html">Partner</a>
+    <!-- Freunde Button -->
+    <a href="freunde.html">Freunde</a> <!-- Neuer Button -->
+    </div>
+
+    <div class="container">
+        <h1>FluestererSocial Media Links</h1>
+        <div class="link-container">
+            <a href="https://www.youtube.com/@FluestererYT" target="_blank">YouTube Kanal besuchen</a>
+            <a href="https://www.roblox.com/de/users/5565076645/profile" target="_blank">Roblox Profil besuchen</a>
+            <a href="https://www.roblox.com/de/communities/35060056/Die-Fl-sternen#!/about" target="_blank">Roblox Gruppe besuchen</a>
+            <a href="https://discord.gg/HWtUsY8Cqd" target="_blank">Discord Server besuchen</a>
+            <a href="https://www.tiktok.com/@flue_sterer" target="_blank">TikTok besuchen</a> <!-- TikTok Link hinzugefügt -->
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Made <br>by <br>Fluesterer</p>
+    </div>
+
+</body>
+</html>
