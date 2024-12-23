@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluesterer Social Stuff</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: rgb(64, 64, 64);
+            background: linear-gradient(180deg, rgba(64, 64, 64, 1) 0%, rgba(0, 0, 0, 1) 100%);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .header-buttons {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        .header-buttons a {
+            font-size: 1.2em;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .header-buttons a:hover {
+            color: #ffcc00;
+            border-color: #ffcc00;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #ffcc00;
+            margin-bottom: 25px;
+        }
+
+        .link-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-container a {
+            display: block;
+            padding: 18px;
+            background: linear-gradient(145deg, #ff6a00, #ff8e00);
+            color: white;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.9em;
+            color: white;
+            text-align: right;
+        }
+
+        .footer a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+
+        .video-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 320px;
+            height: 180px;
+            z-index: 5;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-buttons">
+        <a href="index.html" class="active">Home</a>
+        <a href="ueber-mich.html">Über mich</a>
+        <a href="partner.html">Partner</a>
+        <a href="freunde.html">Freunde</a>
+    </div>
+
+    <div class="container">
+        <h1>FluestererSocial Media Links</h1>
+        <div class="link-container">
+            <a href="https://www.youtube.com/@FluestererYT" target="_blank">YouTube Kanal besuchen</a>
+            <a href="https://www.roblox.com/de/users/5565076645/profile" target="_blank">Roblox Profil besuchen</a>
+            <a href="https://www.roblox.com/de/communities/35060056/Die-Fl-sternen#!/about" target="_blank">Roblox Gruppe besuchen</a>
+            <a href="https://discord.gg/HWtUsY8Cqd" target="_blank">Discord Server besuchen</a>
+            <a href="https://www.tiktok.com/@flue_sterer" target="_blank">TikTok besuchen</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Made <br>by <br>Fluesterer</p>
+    </div>
+
+    <!-- YouTube Video Container -->
+    <div class="video-container">
+        <iframe id="youtube-video" src="https://www.youtube.com/embed/c6HO0hxOonU?autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        const videoIframe = document.getElementById('youtube-video');
+        let currentTime = localStorage.getItem('videoCurrentTime') || 0;
+
+        // Wenn die Seite geladen wird, setzen wir das Video auf den gespeicherten Zeitpunkt
+        videoIframe.src = `https://www.youtube.com/embed/c6HO0hxOonU?autoplay=1&mute=1&start=${currentTime}`;
+
+        // Event listener, um die aktuelle Zeit des Videos zu speichern
+        videoIframe.addEventListener('load', () => {
+            const player = videoIframe.contentWindow;
+
+            setInterval(() => {
+                player.postMessage('{"event":"command","func":"getCurrentTime","args":""}', '*');
+            }, 1000);
+
+            window.addEventListener('message', function(event) {
+                if (event.origin !== 'https://www.youtube.com') return;
+                const data = JSON.parse(event.data);
+                if (data.event === 'infoDelivery' && data.info && data.info.playerState === 1) { // Video läuft
+                    localStorage.setItem('videoCurrentTime', data.info.currentTime);
+                }
+            });
+        });
+
+        // Wenn der Benutzer den Tab wechselt, pausiert das Video
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                videoIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            } else {
+                videoIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            }
+        });
+    </script>
+</body>
+</html>
